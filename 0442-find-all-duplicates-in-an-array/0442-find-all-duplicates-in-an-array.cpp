@@ -4,14 +4,16 @@ public:
     vector<int> ans;
     int n=nums.size();
     
-    sort(nums.begin(),nums.end());
-    for(int i=0;i<n-1;i++)
+    for(int i=0;i<n;i++)
     {
-        if(nums[i]==nums[i+1])
+        if(nums[abs(nums[i])-1]<0)
         {
-            ans.push_back(nums[i]);
+            ans.push_back(abs(nums[i]));
+            continue;
         }
-    }
-    return ans;
+        nums[abs(nums[i])-1]=-nums[abs(nums[i])-1];
+        }
+        return ans;
+        
     }
 };
