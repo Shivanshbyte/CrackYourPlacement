@@ -10,36 +10,31 @@
  * };
  */
 class Solution {
-    vector<string> v;
 public:
-    
-    TreeNode* helper(TreeNode* root, string s)
+    void paths(vector<string> &ans, TreeNode* root, string s)
     {
-        if(root==NULL)
+        if(!root->left && !root->right)
         {
-            return NULL;
+            ans.push_back(s);
+            return;
         }
-        s+=to_string(root->val);
-        s+="->";
-        TreeNode* left=helper(root->left,s);
-        TreeNode* right=helper(root->right,s);
-        if(!left && !right)
+        if(root->left)
         {
-            v.push_back(s);
-            
+            paths(ans,root->left,s+"->"+to_string(root->left->val));
         }
-        return root;
+        if(root->right)
+        {
+            paths(ans,root->right,s+"->"+to_string(root->right->val));
+        }
     }
     vector<string> binaryTreePaths(TreeNode* root) {
-        string s="";
-        helper(root,s);
-        for(int i=0;i<v.size();i++)
-        {
-            int n=v[i].length()-1;
-            v[i].erase(n-1,2);
-        }
-        return v;
-    
+    vector<string> ans;
+    if(root==NULL)
+    {
+        return ans;
+    }
+    paths(ans,root,to_string(root->val));
+        return ans;
         
     }
 };
