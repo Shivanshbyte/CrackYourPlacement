@@ -17,7 +17,13 @@ public:
         {
             return 0;
         }
-        return max(height(root->left),height(root->right))+1;
+        int lheight=height(root->left);
+        int rheight=height(root->right);
+        if(lheight==-1 || rheight==-1 || abs(lheight-rheight)>1)
+        {
+            return -1;
+        }
+        return max(lheight,rheight)+1;
     }
     bool isBalanced(TreeNode* root) 
     {
@@ -25,19 +31,14 @@ public:
         {
             return true;
         }
-        bool left=isBalanced(root->left);
-        bool right=isBalanced(root->right);
-        if(left && right)
+        int h=height(root);
+        if(h==-1)
         {
-            int lheight=height(root->left);
-            int rheight=height(root->right);
-            if(abs(lheight-rheight)<=1)
-            {
-
-                return true;
-            }
+            return false;
         }
-        return false;
+        return true;
         
+        
+      
     }
 };
