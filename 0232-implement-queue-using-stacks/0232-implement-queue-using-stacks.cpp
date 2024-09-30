@@ -7,13 +7,20 @@ public:
     
     void push(int x) {
         
-         while(!s1.empty())
+        s1.push(x);
+        
+    }
+    
+    int pop() {
+        
+        while(!s1.empty())
         {
             int t=s1.top();
-             s1.pop();
+            s1.pop();
             s2.push(t);
         }
-        s1.push(x);
+        int todelete=s2.top();
+        s2.pop();
         while(!s2.empty())
         {
             int t=s2.top();
@@ -21,20 +28,27 @@ public:
             s1.push(t);
         }
         
-    }
-    
-    int pop() {
-        
-        int todelete=s1.top();
-        s1.pop();
-        
         return todelete;
         
     }
     
     int peek() {
-       
-        return s1.top();
+        while(!s1.empty())
+        {
+            int t=s1.top();
+            s1.pop();
+            s2.push(t);
+        }
+        int peek=s2.top();
+        while(!s2.empty())
+        {
+            int t=s2.top();
+            s2.pop();
+            s1.push(t);
+        }
+        
+        
+        return peek;
         
     }
     
